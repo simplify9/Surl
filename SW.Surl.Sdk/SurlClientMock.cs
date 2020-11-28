@@ -8,12 +8,12 @@ namespace SW.Surl.Sdk
         public async Task<ApiResult<string>> GetFullUrl(string key)
         {
             
-            if (key == "ggl")
+            if (key == "sf9")
             {
                 return new ApiResult<string>()
                 {
                     Success = true,
-                    Response = "https://www.google.com"
+                    Response = "https://www.simplify9.com"
                 };
             }
 
