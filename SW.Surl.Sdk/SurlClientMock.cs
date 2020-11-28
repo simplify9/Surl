@@ -7,9 +7,20 @@ namespace SW.Surl.Sdk
     {
         public async Task<ApiResult<string>> GetFullUrl(string key)
         {
-            ApiResult<string> rs = new ApiResult<string>();
-            rs.Response = "https://www.google.com";
-            return rs;
+            
+            if (key == "ggl")
+            {
+                return new ApiResult<string>()
+                {
+                    Success = true,
+                    Response = "https://www.google.com"
+                };
+            }
+
+            return new ApiResult<string>()
+            {
+                Success = false
+            };
         }
     }
 }

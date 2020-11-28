@@ -20,7 +20,7 @@ namespace SW.Surl.Extensions
                 string path = context.Request.Path.Value;
                 string key = path.Split('/')[1];
 
-                SurlClient client = builder.ApplicationServices.GetService<SurlClient>();
+                ISurlClient client = builder.ApplicationServices.GetService<ISurlClient>();
 
                 ApiResult<string> fullUrlResult = await client.GetFullUrl(key);
 
@@ -32,14 +32,13 @@ namespace SW.Surl.Extensions
                 {
                     context.Response.StatusCode = 404;
                     await context.Response.Body.WriteAsync(Encoding.ASCII.GetBytes($"{key} did not match any URLs"));
-                    return;
                 }
             });
         }
 
         public static void UseSurl(this IApplicationBuilder builder)
         {
-            builder.Map("/l/*", Mapper);
+            builder.Map("/l", Mapper);
         }
     }
 }

@@ -26,7 +26,7 @@ namespace SW.Surl
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
-            services.AddScoped<ISurlClient, SurlClientMock>();
+            services.AddTransient<ISurlClient, SurlClientMock>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
