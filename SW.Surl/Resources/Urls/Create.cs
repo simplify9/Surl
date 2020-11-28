@@ -18,17 +18,21 @@ namespace SW.Surl.Resources.Urls
         public async Task<object> Handle(CreateShortUrl request)
         {
             ShortenedUrl entity;
-            string unique;
 
             do
             {
-                unique = Guid.NewGuid().ToString("N").Substring(0, 5);
+                string unique = Guid.NewGuid().
+                    ToString("N").Substring(0, 5);
+                
                 entity = await db.Set<ShortenedUrl>().FindAsync(unique);
+                
             } while (entity != null);
-            
-            return new ShortenedUrl();
 
+            db.Add(new ShortenedUrl(request.FullUrl));
 
+            await db.SaveChangesAsync();
+
+            return null;
         }
     }
 }
