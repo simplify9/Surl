@@ -1,9 +1,5 @@
 using System.Text;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Internal;
-using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using SW.PrimitiveTypes;
 using SW.Surl.Sdk;
