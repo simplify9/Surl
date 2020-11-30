@@ -1,14 +1,20 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using SW.Surl.Extensions;
+using Microsoft.IdentityModel.Tokens;
+using SW.CqApi;
+using SW.HttpExtensions;
+using SW.Surl.Data;
 using SW.Surl.Sdk;
 
 namespace SW.Surl
@@ -26,7 +32,38 @@ namespace SW.Surl
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
-            services.AddTransient<ISurlClient, SurlClientMock>();
+            services.AddApiClient<ISurlClient, SurlClient, SurlClientOptions>();
+            
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).
+                AddJwtBearer(configureOptions =>
+                {
+                    configureOptions.RequireHttpsMetadata = false;
+                    configureOptions.SaveToken = true;
+                    configureOptions.TokenValidationParameters = new TokenValidationParameters()
+                    {
+                        ValidIssuer = Configuration["Token:Issuer"],
+                        ValidAudience = Configuration["Token:Audience"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Token:Key"]))
+                    };
+
+                });
+
+            services.AddCqApi(options =>
+            {
+                options.UrlPrefix = "api";
+            });
+            
+            services.AddDbContext<SurlDbContext>(c =>
+            {
+                c.EnableSensitiveDataLogging(true);
+                c.UseSnakeCaseNamingConvention();
+                c.UseNpgsql(Configuration.GetConnectionString(SurlDbContext.ConnectionString), b =>
+                {
+                    b.MigrationsHistoryTable("_ef_migrations_history", SurlDbContext.Schema);
+                    b.UseAdminDatabase("defaultdb");
+                });
+            
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,14 +84,13 @@ namespace SW.Surl
             app.UseStaticFiles();
 
             app.UseRouting();
-            
-            app.UseSurl();
 
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
+                endpoints.MapControllers();
             });
         }
     }

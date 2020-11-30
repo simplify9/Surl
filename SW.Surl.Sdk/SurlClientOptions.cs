@@ -4,6 +4,6 @@ namespace SW.Surl.Sdk
 {
     public class SurlClientOptions : ApiClientOptionsBase
     {
-        public override string ConfigurationSection { get; }
+        public override string ConfigurationSection { get; } = "SurlClient";
     }
 }

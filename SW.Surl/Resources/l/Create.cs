@@ -5,7 +5,7 @@ using SW.Surl.Data;
 using SW.Surl.Domain;
 using SW.Surl.Model;
 
-namespace SW.Surl.Resources.Urls
+namespace SW.Surl.Resources.l
 {
     public class Create : ICommandHandler<CreateShortUrl>
     {
@@ -18,10 +18,11 @@ namespace SW.Surl.Resources.Urls
         public async Task<object> Handle(CreateShortUrl request)
         {
             ShortenedUrl entity;
+            string unique;
 
             do
             {
-                string unique = Guid.NewGuid().
+                unique = Guid.NewGuid().
                     ToString("N").Substring(0, 5);
                 
                 entity = await db.Set<ShortenedUrl>().FindAsync(unique);
@@ -32,7 +33,7 @@ namespace SW.Surl.Resources.Urls
 
             await db.SaveChangesAsync();
 
-            return null;
+            return unique;;
         }
     }
 }

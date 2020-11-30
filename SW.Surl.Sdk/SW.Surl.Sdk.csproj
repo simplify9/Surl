@@ -5,6 +5,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
       <PackageReference Include="SimplyWorks.HttpExtensions" Version="2.0.33" />
     </ItemGroup>
 

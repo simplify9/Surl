@@ -7,9 +7,8 @@ namespace SW.Surl.Model
         public string FullUrl { get; set; }
     }
 
-    public class GetShortUrl
+    public class ShortUrlInfo
     {
-        public string FullUrl { get; set; }
-        public DateTime ExpiresOn { get; set; }
+        public string Key { get; set; }
     }
 }

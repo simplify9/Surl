@@ -22,6 +22,12 @@ namespace SW.Surl.Data
             {
                 s.Property(url => url.Id).IsCode(5);
             });
+            
+            modelBuilder.CommonProperties(b =>
+            {
+                b.HasSoftDeletionQueryFilter();
+                b.HasAudit(50);
+            });
         }
     }
 }
