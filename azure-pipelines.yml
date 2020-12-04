@@ -54,7 +54,7 @@ jobs:
       versioningScheme: byBuildNumber
 
   - task: NuGetCommand@2
-    condition: startsWith(variables['Build.SourceBranch'], 'refs/heads/releases/')
+    condition: startsWith(variables['Build.SourceBranch'], 'refs/heads/master/')
     inputs:
       command: 'push'
       packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
@@ -63,7 +63,7 @@ jobs:
 
 - job: build
   displayName: Build, push image and chart and deploy to playground
-  condition: startsWith(variables['Build.SourceBranch'], 'refs/heads/releases/')
+  condition: startsWith(variables['Build.SourceBranch'], 'refs/heads/master/')
   steps:
 
   - task: VersionDotNetCoreAssemblies@2
