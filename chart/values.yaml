@@ -58,8 +58,6 @@ db: ""
 
 dbConnectionStringName: ConnectionStrings__SurlDb
 
-dbType: "mysql"
-
 global:
 
   environment: Development
@@ -69,30 +67,8 @@ global:
     issuer: local
     audience: local
 
-  logger:
-    esUrl: ""
-    esUser: ""
-    esPassword: ""
 
-  bus:
-    rabbitUrl: ""
 
-  cloudFiles:
-    accessKeyId: ""
-    secretAccessKey: ""
-    serviceUrl: ""
-    bucketName: ""
-    
-rabbitmq:
-  enabled: false
-  auth:
-    username: ''
-    password: ''
-  ingress:
-    enabled: 'true'
-    extraHosts:
-      - name: ''
-        path: ''
     
 
 

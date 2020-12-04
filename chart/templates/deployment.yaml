@@ -46,77 +46,11 @@ spec:
             - name: ASPNETCORE_ENVIRONMENT
               value: {{ .Values.global.environment }}
 
-            - name: Infolink__DatabaseType
-              value: {{ .Values.dbType }}
-
-            - name: SwLogger__ApplicationName
-              value: {{ template "project.fullname" . }}
-
-            - name: SwLogger__ElasticsearchEnvironments
-              value: {{ .Values.global.environment }}
-
-            - name: InfolinkClient__BaseUrl
-              value: http://{{ template "project.fullname" . }}/api/
-
-            {{- if .Values.global.logger.esUrl }}
-            - name: SwLogger__ElasticsearchUrl
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "project.fullname" . }}
-                  key: esUrl
-            {{- end }}
-
-            {{- if .Values.global.logger.esUser }}
-            - name: SwLogger__ElasticsearchUser
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "project.fullname" . }}
-                  key: esUser
-            {{- end }}
-
-            {{- if .Values.global.logger.esPassword }}
-            - name: SwLogger__ElasticsearchPassword
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "project.fullname" . }}
-                  key: esPassword
-            {{- end }}
-
             - name: {{ .Values.dbConnectionStringName }} 
               valueFrom:
                 secretKeyRef:
                   name: {{ template "project.fullname" . }}
                   key: db
-
-            - name: CloudFiles__AccessKeyId
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "project.fullname" . }}
-                  key: cloudFilesAccessKeyId
-
-            - name: CloudFiles__SecretAccessKey 
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "project.fullname" . }}
-                  key: cloudFilesSecretAccessKey
-
-            - name: CloudFiles__ServiceUrl 
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "project.fullname" . }}
-                  key: cloudFilesServiceUrl
-
-            - name: CloudFiles__BucketName 
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "project.fullname" . }}
-                  key: cloudFilesBucketName
-
-            - name: ConnectionStrings__RabbitMQ 
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "project.fullname" . }}
-                  key: rabbitUrl
 
             - name: Token__Key
               valueFrom:
