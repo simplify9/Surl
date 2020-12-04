@@ -1,10 +1,9 @@
 using System.Threading.Tasks;
 using SW.PrimitiveTypes;
-using SW.Surl.Data;
 using SW.Surl.Domain;
 using SW.Surl.Model;
 
-namespace SW.Surl.Resources.l
+namespace SW.Surl.Resources.Urls
 {
     [Unprotect]
     public class Redirect : IGetHandler<string>
@@ -18,7 +17,7 @@ namespace SW.Surl.Resources.l
         public async Task<object> Handle(string key, bool lookup = false)
         {
             
-            ShortenedUrl url = await db.Set<ShortenedUrl>().FindAsync(key);
+            ShortUrl url = await db.Set<ShortUrl>().FindAsync(key);
 
             if (url == null) return null;
 

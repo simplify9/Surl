@@ -8,17 +8,16 @@ using SW.Surl.Model;
 
 namespace SW.Surl.Sdk
 {
-    public class SurlClient : ApiClientBase<SurlClientOptions>, ISurlClient
+    public class SurlClient : ApiClientBase<SurlClientOptions>
     {
         public SurlClient(HttpClient httpClient, RequestContext requestContext, SurlClientOptions options) : base(httpClient, requestContext, options) { }
         
-
-        public async Task<ShortUrlInfo> CreateShortUrl(string url)
+        public async Task<string> CreateShortUrl(string url)
         {
             return await Builder
-                .Path("l/")
-                .As<ShortUrlInfo>()
-                .PostAsync(new CreateShortUrl()
+                .Path("urls")
+                .As<string>()
+                .PostAsync(new ShortUrlCreate()
                 {
                     FullUrl = url
                 });

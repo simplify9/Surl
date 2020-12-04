@@ -2,7 +2,7 @@ using System;
 
 namespace SW.Surl.Model
 {
-    public class CreateShortUrl
+    public class ShortUrlCreate
     {
         public string FullUrl { get; set; }
     }
