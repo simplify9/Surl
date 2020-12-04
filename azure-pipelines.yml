@@ -48,10 +48,9 @@ jobs:
   - task: DotNetCoreCLI@2
     displayName: 'dotnet pack'
     inputs:
-      command: pack
+      command: 'pack'
       packagesToPack: 'SW.Surl.Sdk/SW.Surl.Sdk.csproj;'
-      nobuild: true
-      versioningScheme: byBuildNumber
+      versioningScheme: 'byBuildNumber'
 
   - task: NuGetCommand@2
     condition: startsWith(variables['Build.SourceBranch'], 'refs/heads/master')
