@@ -49,7 +49,7 @@ jobs:
     displayName: 'dotnet pack'
     inputs:
       command: pack
-      packagesToPack: 'SW.Infolink.Sdk/SW.Infolink.Sdk.csproj;'
+      packagesToPack: 'SW.Surl.Sdk/SW.Surl.Sdk.csproj;'
       nobuild: true
       versioningScheme: byBuildNumber
 
@@ -98,7 +98,7 @@ jobs:
     displayName: Helm package
     inputs:
       command: package
-      chartPath: charts/default
+      chartPath: chart
       arguments: --version $(version) --app-version $(version)
       updatedependency: true
 
@@ -123,5 +123,9 @@ jobs:
       chartName: '$(imageName)'
       chartVersion: $(version)
       releaseName: '$(imageName)'
-      overrideValues: 'db=$(dbConnection),ingress.enabled=true,ingress.hosts={infolink.sf9.io},global.bus.rabbitUrl=$(rabbitUrl),global.cloudFiles.secretAccessKey=$(SecretAccessKey),global.cloudFiles.accessKeyId=$(AccessKeyId),global.cloudFiles.serviceUrl=$(ServiceUrl),global.cloudFiles.bucketName=$(BucketName)'
-      arguments: --repo https://charts.sf9.io
+      arguments: >
+        --repo https://charts.sf9.io
+        --set db=$(dbConnection)
+        --set ingress.enabled=true
+        --set ingress.hosts={surl.sf9.io}
+
