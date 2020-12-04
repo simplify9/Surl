@@ -30,16 +30,20 @@ namespace SW.Surl
                     db.Set<ShortUrl>()
                         .RemoveRange(db.Set<ShortUrl>().Where(s => s.CreatedOn < DateTime.UtcNow.AddDays(-30)));
 
-                    await db.SaveChangesAsync();  
+                    await db.SaveChangesAsync(stoppingToken);
+
                 }
                 catch (Exception)
                 {
 
-                    throw;
+                    //throw;
                 }
+
+
+                await Task.Delay(TimeSpan.FromMinutes(50), stoppingToken);
+
             }
 
-            await Task.Delay(TimeSpan.FromMinutes(50), stoppingToken);
 
         }
     }
