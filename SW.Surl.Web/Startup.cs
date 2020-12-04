@@ -45,7 +45,7 @@ namespace SW.Surl.Web
             services.AddCqApi(options =>
             {
                 options.UrlPrefix = "api";
-                options.ProtectAll = true;
+                //options.ProtectAll = true;
 
             });
 

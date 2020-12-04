@@ -19,7 +19,7 @@ namespace SW.Surl.Sdk
                 .As<string>()
                 .PostAsync(new ShortUrlCreate()
                 {
-                    FullUrl = url
+                    Url = url
                 });
         }
     }
