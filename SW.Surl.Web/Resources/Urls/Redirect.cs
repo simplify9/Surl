@@ -1,7 +1,6 @@
 using System.Threading.Tasks;
 using SW.PrimitiveTypes;
 using SW.Surl.Domain;
-using SW.Surl.Model;
 
 namespace SW.Surl.Resources.Urls
 {

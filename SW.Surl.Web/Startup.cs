@@ -26,7 +26,7 @@ namespace SW.Surl.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers(); 
-            services.AddApiClient<SurlClient, SurlClientOptions>();
+            //services.AddApiClient<SurlClient, SurlClientOptions>();
 
             services.AddAuthentication().
                 AddJwtBearer(configureOptions =>
